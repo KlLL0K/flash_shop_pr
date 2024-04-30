@@ -1,3 +1,4 @@
+
 from flask import Flask
 from data import db_session
 app = Flask(__name__)
