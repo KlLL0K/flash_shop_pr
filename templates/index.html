@@ -21,14 +21,16 @@
           <a class="nav-link" href="/base">главная</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">корзина</a>
+          <a class="nav-link" href="/cart">корзина</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">вход</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/register">регистрация</a>
-        </li>
+        {% if current_user.is_authenticated %}
+    <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+{% else %}
+    <p>
+        <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+        <a class="btn btn-success" href="/login">Войти</a>
+    </p>
+{% endif %}
       </ul>
     </div>
   </div>

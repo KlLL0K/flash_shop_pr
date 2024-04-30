@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Подключение API Яндекса для отображения карты -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_ключ_апи&lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Flash shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/base">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart">Корзина</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container mt-5">
+    <h1>Оформление заказа</h1>
+    <form action="/confirm_order" method="POST">
+        <div class="mb-3">
+            <label for="card_number" class="form-label">Номер карты</label>
+            <input type="text" class="form-control" id="card_number" name="card_number" required>
+        </div>
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Фамилия</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="city" class="form-label">Город</label>
+            <input type="text" class="form-control" id="city" name="city" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Подтвердить заказ</button>
+    </form>
+    <div id="map" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+</div>
+
+<script>
+    ymaps.ready(init);
+
+    function init() {
+        var myMap = new ymaps.Map('map', {
+            center: [55.76, 37.64],
+            zoom: 10
+        });
+
+        // Добавляем точки на карту
+        var placemarks = [
+            {latitude: 55.75, longitude: 37.62, text: 'Точка 1'},
+            {latitude: 55.76, longitude: 37.63, text: 'Точка 2'},
+            {latitude: 55.77, longitude: 37.64, text: 'Точка 3'}
+        ];
+
+        placemarks.forEach(function (place) {
+            myMap.geoObjects.add(new ymaps.Placemark([place.latitude, place.longitude], {
+                balloonContent: place.text
+            }));
+        });
+    }
+</script>
+</body>
+</html>

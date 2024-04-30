@@ -1,17 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-    <title>{{title}}</title>
+
+    <title>{{prof}}</title>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-light bg-light">
+        <h1>Миссия Колонизация марса</h1>
         {% if current_user.is_authenticated %}
     <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
 {% else %}
@@ -20,11 +23,31 @@
         <a class="btn btn-success" href="/login">Войти</a>
     </p>
 {% endif %}
-        <a class="navbar-brand" href="#">flash shop</a>
+        <a class="navbar-brand" href="#">Mars one</a>
     </nav>
+    <h3 class="text-black-50">И на марсе будут яблони цвести</h3>
 </header>
-<main role="main" class="container">
-    {% block content %}{% endblock %}
-</main>
+<div>
+    <h4>Список профессий</h4>
+
+
+    {% if 'ol' in ch %}
+    {% for prof in work_list1 %}
+    <ul>
+    <li>{{prof }}</li>
+    </ul>
+    {% endfor %}
+    {% elif 'ul' in ch %}
+    {% for prof in work_list1 %}
+    <ol>
+    {{ loop.index }}. {{prof }}
+    </ol>
+    {% endfor %}
+    {% else %}
+    неверный параметр
+
+    {% endif %}
+
+</div>
 </body>
 </html>
